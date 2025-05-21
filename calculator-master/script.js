@@ -18,23 +18,8 @@ buttons.forEach(button => {
             sinal = '';
         } else if (value === '=') {
             try {
-                if (sinal === '+') {
-                    display.value = num1 + num2;
-                    num1 = display.value;
-                }
-                if (sinal === '-') {
-                    display.value = num1 - num2;
-                    num1 = display.value;
-                }
-                if (sinal === '*') {
-                    display.value = num1 * num2;
-                    num1 = display.value;
-                }
-                if (sinal === '/') {
-                    display.value = num1 / num2;
-                    num1 = display.value;
-                }
-
+                num2 = parseFloat(valorAtual)
+                sinais(num1, num2, sinal, valorAtual)
             } catch {
                 display.value = 'Erro';
                 valorAtual = '';
@@ -45,21 +30,14 @@ buttons.forEach(button => {
         } else if (value === "+") {
             if (num1 != 0 && sinal != "") {
                 num2 = parseFloat(valorAtual);
+                sinais(num1, num2, sinal, valorAtual);
                 valorAtual = '';
                 sinal = "+"
-                display.value = num1 + num2;
                 num1 = parseFloat(display.value);
                 display.value += sinal
-
                 num2 = 0;
 
 
-
-                console.log("-------------");
-                console.log(num1);
-                console.log(num2);
-                console.log(display.value);
-                console.log(valorAtual);
             } else {
                 num1 = parseFloat(valorAtual);
                 valorAtual = "";
@@ -69,20 +47,61 @@ buttons.forEach(button => {
 
 
         } else if (value === "-") {
-            if (num1) {
-                num2 = valorAtual;
-                display.value = num1 - num2;
-                num1 = display.value;
+            if (num1 != 0 && sinal != "") {
+                num2 = parseFloat(valorAtual);
+                sinais(num1, num2, sinal, valorAtual);
+                valorAtual = '';
+                sinal = "-"
+                num1 = parseFloat(display.value);
+                display.value += sinal
+                num2 = 0;
+
+
+            } else {
+                num1 = parseFloat(valorAtual);
+                valorAtual = "";
+                display.value += value;
+                sinal = value;
             }
 
 
 
         } else if (value === "X") {
+            if (num1 != 0 && sinal != "") {
+                num2 = parseFloat(valorAtual);
+                sinais(num1, num2, sinal, valorAtual);
+                valorAtual = '';
+                sinal = "*"
+                num1 = parseFloat(display.value);
+                display.value += value
+                num2 = 0;
 
+
+            } else {
+                num1 = parseFloat(valorAtual);
+                valorAtual = "";
+                display.value += value;
+                sinal = "*";
+            }
 
 
         } else if (value === "÷") {
+            if (num1 != 0 && sinal != "") {
+                num2 = parseFloat(valorAtual);
+                sinais(num1, num2, sinal, valorAtual);
+                valorAtual = '';
+                sinal = "/"
+                num1 = parseFloat(display.value);
+                display.value += value
+                num2 = 0;
 
+
+            } else {
+                num1 = parseFloat(valorAtual);
+                valorAtual = "";
+                display.value += value;
+                sinal = "/";
+            }
 
 
 
@@ -92,3 +111,37 @@ buttons.forEach(button => {
         }
     });
 });
+
+function sinais(num1, num2, sinal, valorAtual) {
+    var n1 = parseFloat(num1)
+    var n2 = parseFloat(num2)
+
+
+
+    if (n1 && sinal) {
+        if (sinal === '+') {
+            num2 = parseFloat(valorAtual);
+            display.value = n1 + n2;
+            num1 = display.value;
+        }
+        if (sinal === '-') {
+            num2 = parseFloat(valorAtual);
+            display.value = n1 - n2;
+            num1 = display.value;
+        }
+        if (sinal === '*') {
+            num2 = parseFloat(valorAtual);
+            display.value = n1 * n2;
+            num1 = display.value;
+        }
+        if (sinal === '/') {
+            num2 = parseFloat(valorAtual);
+            display.value = n1 / n2;
+            num1 = display.value;
+        }
+    } else {
+        display.value = num1;
+        sinal = "";
+        num2 = 0;
+    }
+}
