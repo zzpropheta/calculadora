@@ -5,6 +5,117 @@ let num1 = 0;
 let num2 = 0;
 let sinal = '';
 
+document.addEventListener("keydown", (event) => {
+    const key = event.key;
+    if (key === "Enter" || key >= 0 && key <= 9 || key === "+" || key === "-" || key === "*" || key === "/" || key === "," || key === "Backspace" || key === "=") {
+
+        const value = key;
+
+        if (value === 'Backspace') {
+            display.value = ''
+            valorAtual = '';
+            num1 = 0;
+            num2 = 0;
+            sinal = '';
+        } else if (value === 'Enter') {
+            try {
+                num2 = parseFloat(valorAtual)
+                sinais(num1, num2, sinal, valorAtual)
+            } catch {
+                display.value = 'Erro';
+                valorAtual = '';
+            }
+        } else if (value >= 0 && value <= 9) {
+            display.value += value;
+            valorAtual += value;
+        } else if (value === "+") {
+            if (num1 != 0 && sinal != "") {
+                num2 = parseFloat(valorAtual);
+                sinais(num1, num2, sinal, valorAtual);
+                valorAtual = '';
+                sinal = "+"
+                num1 = parseFloat(display.value);
+                display.value += sinal
+                num2 = 0;
+
+
+            } else {
+                num1 = parseFloat(valorAtual);
+                valorAtual = "";
+                display.value += value;
+                sinal = value;
+            }
+
+
+        } else if (value === "-") {
+            if (num1 != 0 && sinal != "") {
+                num2 = parseFloat(valorAtual);
+                sinais(num1, num2, sinal, valorAtual);
+                valorAtual = '';
+                sinal = "-"
+                num1 = parseFloat(display.value);
+                display.value += sinal
+                num2 = 0;
+
+
+            } else {
+                num1 = parseFloat(valorAtual);
+                valorAtual = "";
+                display.value += value;
+                sinal = value;
+            }
+
+
+
+        } else if (value === "*") {
+            if (num1 != 0 && sinal != "") {
+                num2 = parseFloat(valorAtual);
+                sinais(num1, num2, sinal, valorAtual);
+                valorAtual = '';
+                sinal = "*"
+                num1 = parseFloat(display.value);
+                display.value += "X"
+                num2 = 0;
+
+
+            } else {
+                num1 = parseFloat(valorAtual);
+                valorAtual = "";
+                display.value += 'X';
+                sinal = "*";
+            }
+
+
+        } else if (value === "/") {
+            if (num1 != 0 && sinal != "") {
+                num2 = parseFloat(valorAtual);
+                sinais(num1, num2, sinal, valorAtual);
+                valorAtual = '';
+                sinal = "/";
+                num1 = parseFloat(display.value);
+                display.value += "÷"
+                num2 = 0;
+
+
+            } else {
+                num1 = parseFloat(valorAtual);
+                valorAtual = "";
+                display.value += "÷";
+                sinal = "/";
+            }
+
+        } else if (value === ",") {
+            display.value += ".";
+            valorAtual += ".";
+
+
+        } else {
+            valorAtual += value;
+            display.value = valorAtual;
+        }
+    }
+})
+
 
 buttons.forEach(button => {
     button.addEventListener('click', () => {
@@ -103,6 +214,9 @@ buttons.forEach(button => {
                 sinal = "/";
             }
 
+        } else if (value === ".") {
+            display.value += value;
+            valorAtual += value;
 
 
         } else {
