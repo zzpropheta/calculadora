@@ -43,15 +43,28 @@ buttons.forEach(button => {
             display.value += value;
             valorAtual += value;
         } else if (value === "+") {
-            if (num1 != 0) {
-                num2 = valorAtual;
+            if (num1 != 0 && sinal != "") {
+                num2 = parseFloat(valorAtual);
+                valorAtual = '';
+                sinal = "+"
                 display.value = num1 + num2;
-                num1 = display.value;
+                num1 = parseFloat(display.value);
+                display.value += sinal
+
                 num2 = 0;
+
+
+
+                console.log("-------------");
+                console.log(num1);
+                console.log(num2);
+                console.log(display.value);
+                console.log(valorAtual);
             } else {
-                num1 = valorAtual;
+                num1 = parseFloat(valorAtual);
                 valorAtual = "";
-                sinal = 
+                display.value += value;
+                sinal = value;
             }
 
 
